@@ -11,8 +11,8 @@ function heuristic(a,b){
     return d;
 }
 
-var cols = 5;
-var rows = 5;
+var cols = 50;
+var rows = 50;
 
 var openSet = [];
 var closedSet = [];
@@ -35,10 +35,20 @@ function Spot(i,j)
     this.neighbors = [];
     this.wall = false;
 
-    if(random(1) < 0.03){
+    if(random(1) < 0){
         this.wall = true;
     }
+    //click function DONE 14 December 2020
+    this.clicked = function(){
+        var d = dist(mouseX,mouseY,this.i * w,this.j * h );
 
+        if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
+            noStroke();
+            fill(135);
+            rect(this.i * w,this.j * h, w - 1, h - 1);
+        }
+
+    }
     this.show = function(col){
         fill(col);
         if(this.wall){
@@ -183,6 +193,10 @@ function draw(){
         path[i].show(color(0,0,255));
     }
 }
-function mouseClicked(it){
-    debugger;
+function mousePressed(it){
+    for(var i = 0;i<cols;i++){
+        for(var j = 0;j<rows;j++){
+            grid[i][j].clicked();
+        }
+    }
 }
