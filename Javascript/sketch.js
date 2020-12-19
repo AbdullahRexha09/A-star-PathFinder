@@ -11,8 +11,8 @@ function heuristic(a,b){
     return d;
 }
 
-var cols = 50;
-var rows = 50;
+var cols = 10;
+var rows = 10;
 
 var openSet = [];
 var closedSet = [];
@@ -22,6 +22,8 @@ var end;
 var w,h;
 var path = [];
 var noSolution = false;
+var startPathFinder = false;
+var shouldDrawGrid = true;
 
 var grid = new Array(cols);
 function Spot(i,j)
@@ -35,20 +37,24 @@ function Spot(i,j)
     this.neighbors = [];
     this.wall = false;
 
-    if(random(1) < 0){
+    if(random(1) < 0.3){
         this.wall = true;
     }
     //click function DONE 14 December 2020
     this.clicked = function(){
+        if(((start.i == this.i && start.j == this.j) || (end.i == this.i && end.j == this.j))){}
+        else{
         var d = dist(mouseX,mouseY,this.i * w,this.j * h );
 
         if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
             noStroke();
-            fill(135);
+            fill(0);
             rect(this.i * w,this.j * h, w - 1, h - 1);
+            this.wall = true;
         }
 
     }
+}
     this.show = function(col){
         fill(col);
         if(this.wall){
@@ -110,12 +116,26 @@ function setup(){
     }
     start = grid[0][0];
     end = grid[cols-1][rows-1];
+
     start.wall = false;
     end.wall = false;
 
     openSet.push(start);
 }
 function draw(){
+    if(shouldDrawGrid){
+        background(0);
+    for(var i =0;i<cols;i++){
+        for(var j=0;j<rows;j++){
+            grid[i][j].show(color(255));
+        }
+    }
+}
+    shouldDrawGrid = false;
+    start.show(color(0,255,0));
+    end.show(color(0,0,255));
+
+    if(startPathFinder){
     if(openSet.length > 0){
         var winner = 0;
         for(var i = 0;i<openSet.length;i++){
@@ -169,17 +189,13 @@ function draw(){
         noLoop();
         return;
     }
-    background(0);
-    for(var i =0;i<cols;i++){
-        for(var j=0;j<rows;j++){
-            grid[i][j].show(color(255));
-        }
-    }
+  
+
     for(var i=0; i < openSet.length;i++){
-        openSet[i].show(color(0,255,0));
+        openSet[i].show(color(0,255,0)); //green
     }
     for(var i=0; i < closedSet.length;i++){
-        closedSet[i].show(color(255,0,0));
+        closedSet[i].show(color(255,0,0)); //red
     }
     path = [];
     var temp = current;
@@ -190,8 +206,9 @@ function draw(){
     }
 
     for(var i = 0;i<path.length;i++){
-        path[i].show(color(0,0,255));
+        path[i].show(color(0,0,255)); //blue
     }
+}
 }
 function mousePressed(it){
     for(var i = 0;i<cols;i++){
@@ -199,4 +216,10 @@ function mousePressed(it){
             grid[i][j].clicked();
         }
     }
+}
+function mouseDragged(it){
+
+}
+function start1(){
+    startPathFinder = true;
 }
