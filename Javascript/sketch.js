@@ -42,7 +42,50 @@ function Spot(i,j)
     }
     //click function DONE 14 December 2020
     this.clicked = function(){
-        if(((start.i == this.i && start.j == this.j) || (end.i == this.i && end.j == this.j))){}
+        if(!start || !end){
+            if(!start){
+        var d = dist(mouseX,mouseY,this.i * w,this.j * h );
+        if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
+            noStroke();
+            fill(color(0,255,0));
+            rect(this.i * w,this.j * h, w - 1, h - 1);
+            start = grid[this.i][this.j];
+            if(openSet){
+                removeFromArray(openSet,grid[0][0]);
+                openSet.push(start);
+            }
+        }
+    }
+            if(!end){
+                var d = dist(mouseX,mouseY,this.i * w,this.j * h );
+                if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
+                    noStroke();
+                    fill(color(0,255,0));
+                    rect(this.i * w,this.j * h, w - 1, h - 1);
+                    end = grid[this.i][this.j];
+                }
+            }
+        
+        }
+    else{
+        if((start.i == this.i && start.j == this.j) || (end.i == this.i && end.j == this.j)){
+        var d = dist(mouseX,mouseY,this.i * w,this.j * h );
+        if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
+            if((start.i == this.i && start.j == this.j)){
+                noStroke();
+                fill(255);
+                rect(this.i * w,this.j * h, w - 1, h - 1);
+                start = undefined;
+            }
+            else if(end.i == this.i && end.j == this.j){
+                noStroke();
+                fill(255);
+                rect(this.i * w,this.j * h, w - 1, h - 1);
+                end = undefined;
+            }
+        }
+
+        }
         else{
         var d = dist(mouseX,mouseY,this.i * w,this.j * h );
 
@@ -54,6 +97,9 @@ function Spot(i,j)
         }
 
     }
+       
+    }
+
 }
     this.show = function(col){
         fill(col);
@@ -132,8 +178,13 @@ function draw(){
     }
 }
     shouldDrawGrid = false;
+
+    if(start){
     start.show(color(0,255,0));
+    }
+    if(end){
     end.show(color(0,0,255));
+    }
 
     if(startPathFinder){
     if(openSet.length > 0){
