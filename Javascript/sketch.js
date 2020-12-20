@@ -1,31 +1,20 @@
-function removeFromArray(arr,elt){
-    for(var i = arr.length - 1; i>= 0; i--){
-        if(arr[i] == elt){
-            arr.splice(i,1);
-        }
-    }
-}
-function heuristic(a,b){
-    var d = dist(a.i,a.j,b.i,b.j);
-    // var d = abs(a.i - b.i) + abs(a.j - b.j);
-    return d;
-}
-
-var cols = 50;
-var rows = 50;
+var cols = 5;
+var rows = 5;
 
 var openSet = [];
 var closedSet = [];
 
 var start;
 var end;
-var w,h;
+var w, h;
 var path = [];
 var noSolution = false;
+var startPathFinder = false;
+var shouldDrawGrid = true;
 
 var grid = new Array(cols);
-function Spot(i,j)
-{
+
+function Spot(i, j) {
     this.i = i;
     this.j = j;
     this.f = 0;
@@ -35,168 +24,248 @@ function Spot(i,j)
     this.neighbors = [];
     this.wall = false;
 
-    if(random(1) < 0){
+    if (random(1) < 0.00001) {
         this.wall = true;
     }
     //click function DONE 14 December 2020
-    this.clicked = function(){
-        var d = dist(mouseX,mouseY,this.i * w,this.j * h );
+    this.clicked = function() {
 
-        if(floor(d) < floor(w) && this.i * w  < mouseX && this.j * h  < mouseY){
-            noStroke();
-            fill(135);
-            rect(this.i * w,this.j * h, w - 1, h - 1);
+        var d = dist(mouseX, mouseY, this.i * w, this.j * h);
+        if ((d < w) && this.i * w < mouseX && this.j * h < mouseY) {
+
+            if (!start || !end) {
+                if (!start & end != grid[this.i][this.j]) {
+                    noStroke();
+                    fill(color(0, 255, 0));
+                    rect(this.i * w, this.j * h, w - 1, h - 1);
+                    start = grid[this.i][this.j];
+                    if (openSet) {
+                        removeFromArray(openSet, grid[0][0]);
+                        openSet.push(start);
+                    }
+
+                }
+                if (!end & start != grid[this.i][this.j]) {
+                    noStroke();
+                    fill(color(0, 255, 0));
+                    rect(this.i * w, this.j * h, w - 1, h - 1);
+                    end = grid[this.i][this.j];
+
+                }
+
+            } else {
+                if ((start.i == this.i && start.j == this.j) || (end.i == this.i && end.j == this.j)) {
+                    if ((start.i == this.i && start.j == this.j)) {
+                        noStroke();
+                        fill(255);
+                        rect(this.i * w, this.j * h, w - 1, h - 1);
+                        start = undefined;
+                    } else if (end.i == this.i && end.j == this.j) {
+                        noStroke();
+                        fill(255);
+                        rect(this.i * w, this.j * h, w - 1, h - 1);
+                        end = undefined;
+                    }
+                } else {
+                    noStroke();
+                    fill(0);
+                    rect(this.i * w, this.j * h, w - 1, h - 1);
+                    this.wall = true;
+                }
+
+            }
         }
 
     }
-    this.show = function(col){
+    this.show = function(col) {
         fill(col);
-        if(this.wall){
+        if (this.wall) {
             fill(0);
         }
         noStroke();
-        rect(this.i * w,this.j * h, w - 1, h - 1);
+        rect(this.i * w, this.j * h, w - 1, h - 1);
     }
-    this.addNeighbors = function(grid){
-        var i  = this.i;
+    this.addNeighbors = function(grid) {
+        var i = this.i;
         var j = this.j;
-        if(i < cols - 1){
+        if (i < cols - 1) {
             this.neighbors.push(grid[i + 1][j]);
         }
-        if(i > 0){
+        if (i > 0) {
             this.neighbors.push(grid[i - 1][j]);
         }
-        if(j < rows - 1){
-            this.neighbors.push(grid[i][j +1]);
+        if (j < rows - 1) {
+            this.neighbors.push(grid[i][j + 1]);
         }
-        if(j > 0){
+        if (j > 0) {
             this.neighbors.push(grid[i][j - 1]);
         }
-        if(i > 0 && j > 0){
-            this.neighbors.push(grid[i -1][j - 1]);
+        if (i > 0 && j > 0) {
+            this.neighbors.push(grid[i - 1][j - 1]);
         }
-        if(i < cols - 1 && j > 0){
+        if (i < cols - 1 && j > 0) {
             this.neighbors.push(grid[i + 1][j - 1])
         }
-        if(i > 0 && j < rows - 1){
+        if (i > 0 && j < rows - 1) {
             this.neighbors.push(grid[i - 1][j + 1]);
-        } 
-        if(i < cols - 1 && j < rows - 1){
+        }
+        if (i < cols - 1 && j < rows - 1) {
             this.neighbors.push(grid[i + 1][j + 1]);
         }
 
     }
 }
-function setup(){
-    createCanvas(400,400);
+
+function setup() {
+    createCanvas(400, 400);
     console.log('A*');
 
     w = width / cols;
     h = height / rows;
 
-    for(var i=0;i<cols;i++){
+    for (var i = 0; i < cols; i++) {
         grid[i] = new Array(rows);
     }
 
-    for(var i = 0;i<cols;i++){
-        for(var j = 0;j<rows;j++){
-            grid[i][j] = new Spot(i,j);
+    for (var i = 0; i < cols; i++) {
+        for (var j = 0; j < rows; j++) {
+            grid[i][j] = new Spot(i, j);
         }
     }
-    for(var i = 0;i<cols;i++){
-        for(var j = 0;j<rows;j++){
+    for (var i = 0; i < cols; i++) {
+        for (var j = 0; j < rows; j++) {
             grid[i][j].addNeighbors(grid);
         }
     }
     start = grid[0][0];
-    end = grid[cols-1][rows-1];
+    end = grid[cols - 1][rows - 1];
+
     start.wall = false;
     end.wall = false;
 
     openSet.push(start);
 }
-function draw(){
-    if(openSet.length > 0){
-        var winner = 0;
-        for(var i = 0;i<openSet.length;i++){
-            if(openSet[i].f < openSet[winner].f){
-                winner = i;
+
+function draw() {
+    if (shouldDrawGrid) {
+        background(0);
+        for (var i = 0; i < cols; i++) {
+            for (var j = 0; j < rows; j++) {
+                grid[i][j].show(color(255));
             }
         }
-        var current = openSet[winner];
+    }
+    shouldDrawGrid = false;
 
-        if(current === end){
-            var temp = current;
-            // path.push(temp);
-            // while(temp.previous){
-            //     path.push(temp.previous);
-            //     temp = temp.previous;
-            // }
-            noLoop();
-            console.log("DOne");
-    
-        }
-        removeFromArray(openSet,current);
-        closedSet.push(current);
+    if (start) {
+        start.show(color(0, 255, 0));
+    }
+    if (end) {
+        end.show(color(0, 0, 255));
+    }
 
-        var neighbors = current.neighbors; 
-        for(var i = 0;i<neighbors.length;i++){
-            var neighbor = neighbors[i];
-            if(!closedSet.includes(neighbor) && !neighbor.wall){
-            var tempG = current.g + 1;
-
-            var newPath = false;
-            if(openSet.includes(neighbor)){
-                if(tempG < neighbor.g){
-                    neighbor.g = tempG;
-                    newPath = true;
+    if (startPathFinder) {
+        if (openSet.length > 0) {
+            var winner = 0;
+            for (var i = 0; i < openSet.length; i++) {
+                if (openSet[i].f < openSet[winner].f) {
+                    winner = i;
                 }
-            }else{
-                neighbor.g = tempG;
-                newPath = true;
-                openSet.push(neighbor);
             }
-            if(newPath){
-            neighbor.h = heuristic(neighbor,end);
-            neighbor.f = neighbor.g + neighbor.h;
-            neighbor.previous = current;
-        }
-        }
-        } 
-    }
-    else{
-        console.log("No Solution");
-        noLoop();
-        return;
-    }
-    background(0);
-    for(var i =0;i<cols;i++){
-        for(var j=0;j<rows;j++){
-            grid[i][j].show(color(255));
-        }
-    }
-    for(var i=0; i < openSet.length;i++){
-        openSet[i].show(color(0,255,0));
-    }
-    for(var i=0; i < closedSet.length;i++){
-        closedSet[i].show(color(255,0,0));
-    }
-    path = [];
-    var temp = current;
-    path.push(temp);
-    while(temp.previous){
-        path.push(temp.previous);
-        temp = temp.previous;
-    }
+            var current = openSet[winner];
 
-    for(var i = 0;i<path.length;i++){
-        path[i].show(color(0,0,255));
+            if (current === end) {
+                var temp = current;
+                // path.push(temp);
+                // while(temp.previous){
+                //     path.push(temp.previous);
+                //     temp = temp.previous;
+                // }
+                noLoop();
+                console.log("DOne");
+
+            }
+            removeFromArray(openSet, current);
+            closedSet.push(current);
+
+            var neighbors = current.neighbors;
+            for (var i = 0; i < neighbors.length; i++) {
+                var neighbor = neighbors[i];
+                if (!closedSet.includes(neighbor) && !neighbor.wall) {
+                    // var tempG = current.g + 1;
+                    var tempG = current.g + heuristic(current,neighbor);
+
+                    var newPath = false;
+                    if (openSet.includes(neighbor)) {
+                        if (tempG < neighbor.g) {
+                            neighbor.g = tempG;
+                            newPath = true;
+                        }
+                    } else {
+                        neighbor.g = tempG;
+                        newPath = true;
+                        openSet.push(neighbor);
+                    }
+                    if (newPath) {
+                        neighbor.h = heuristic(neighbor, end);
+                        neighbor.f = neighbor.g + neighbor.h;
+                        neighbor.previous = current;
+                    }
+                }
+            }
+        } else {
+            console.log("No Solution");
+            noLoop();
+            return;
+        }
+
+
+        for (var i = 0; i < openSet.length; i++) {
+            openSet[i].show(color(0, 255, 0)); //green
+        }
+        for (var i = 0; i < closedSet.length; i++) {
+            closedSet[i].show(color(255, 0, 0)); //red
+        }
+        path = [];
+        var temp = current;
+        path.push(temp);
+        while (temp.previous) {
+            path.push(temp.previous);
+            temp = temp.previous;
+        }
+
+        for (var i = 0; i < path.length; i++) {
+            path[i].show(color(0, 0, 255)); //blue
+        }
     }
 }
-function mousePressed(it){
-    for(var i = 0;i<cols;i++){
-        for(var j = 0;j<rows;j++){
+
+function removeFromArray(arr, elt) {
+    for (var i = arr.length - 1; i >= 0; i--) {
+        if (arr[i] == elt) {
+            arr.splice(i, 1);
+        }
+    }
+}
+
+function heuristic(a, b) {
+    var d = dist(a.i, a.j, b.i, b.j);
+    // var d = abs(a.i - b.i) + abs(a.j - b.j);
+    return d;
+}
+
+function mousePressed(it) {
+    for (var i = 0; i < cols; i++) {
+        for (var j = 0; j < rows; j++) {
             grid[i][j].clicked();
         }
     }
+}
+
+function mouseDragged(it) {
+
+}
+
+function start1() {
+    startPathFinder = true;
 }
