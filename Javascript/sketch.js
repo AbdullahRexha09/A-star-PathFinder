@@ -17,7 +17,7 @@ var grid = new Array(cols);
 //
 
 function setup() {
-    let cnv = createCanvas(400, 400);
+    let cnv = createCanvas(500, 500);
     cnv.parent('sketch-holder')
     console.log('A*');
 
@@ -48,7 +48,6 @@ function setup() {
 }
 
 function draw() {
-    frameRate(1);
     if (shouldDrawGrid) {
         background(0);
         for (var i = 0; i < cols; i++) {

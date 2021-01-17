@@ -15,7 +15,8 @@
 		<script language="javascript" type="text/javascript" src="libraries/bootbox.js"></script>
 		<script language="javascript" type="text/javascript" src="libraries/bootbox.locales.js"></script>
 		<script language="javascript" type="text/javascript" src="libraries/bootbox.locales.min.js"></script>
-		<script language="javascript" type="text/javascript" src="libraries/bootbox.min.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/bootbox.min.js"></script>
+    <script language="javascript" type="text/javascript" src="InputRange.js"></script>
         <script language="javascript" type="text/javascript" src="Block.js"></script>
         <!-- <script language="javascript" type="text/javascript" src="sketchpoint.js"></script> -->
         <script language="javascript" type="text/javascript" src="sketch.js"></script>
@@ -34,14 +35,25 @@
 
             </style>
     </head>
-    <body>
+    <body onload="onInit()">
       <div class="btn-group" role="group" aria-label="Basic example">
       <button type="button" class="btn btn-primary" onclick="start1()">Start</button>
       <button type="button" class="btn btn-secondary" onclick="reload()">Reload</button>
      </div>
-     <div id="sketch-holder">
+     <div class="row">
+    <div class="col-sm-5">
+     <div id="sketch-holder" >
       <!-- Our sketch will go here! -->
     </div>
+  </div>
+    <div class="col-sm-5">
+      <br>
+      Percentage of block possibility:<br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
+       <span id="lbltipAddedComment"></span>
+    </div>
+    
+  </div>
+  
 
 
     </body>

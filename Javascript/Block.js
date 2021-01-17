@@ -7,7 +7,7 @@ function Block(i, j) {
     this.previous = undefined;
     this.neighbors = [];
     this.wall = false;
-
+    
 
     this.clicked = function() {
         
@@ -95,7 +95,7 @@ function Block(i, j) {
         }
 
     }
-    if (random(1) < 0.3) {
+    if (random(1) < localStorage.getItem("perctenge")) {
         this.wall = true;
     }
     
