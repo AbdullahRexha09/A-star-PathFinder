@@ -1,0 +1,60 @@
+<html>
+    <head>
+	    <script language="javascript" type="text/javascript" src="libraries/jquery-3.5.1.min.js"></script>
+        <script language="javascript" type="text/javascript" src="libraries/p5.js"></script>
+        <script language="javascript" type="text/javascript" src="libraries/p5.dom.js"></script>
+        <script language="javascript" type="text/javascript" src="libraries/p5.sound.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="libraries/bootstrap.bundle.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootstrap.bundle.min.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootstrap.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootstrap.min.js"></script>
+		
+		<script language="javascript" type="text/javascript" src="libraries/bootbox.all.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootbox.all.min.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootbox.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootbox.locales.js"></script>
+		<script language="javascript" type="text/javascript" src="libraries/bootbox.locales.min.js"></script>
+    <script language="javascript" type="text/javascript" src="libraries/bootbox.min.js"></script>
+    <script language="javascript" type="text/javascript" src="InputRange.js"></script>
+        <script language="javascript" type="text/javascript" src="Block.js"></script>
+        <!-- <script language="javascript" type="text/javascript" src="sketchpoint.js"></script> -->
+        <script language="javascript" type="text/javascript" src="sketch.js"></script>
+        <!-- <script language="javascript" type="text/javascript" src="maze.js"></script> -->
+		
+		<link rel="stylesheet" href="libraries/bootstrap.css">
+		<link rel="stylesheet" href="libraries/bootstrap.min.css">
+		<link rel="stylesheet" href="libraries/bootstrap-grid.css">
+		<link rel="stylesheet" href="libraries/bootstrap-grid.min.css">
+		<link rel="stylesheet" href="libraries/bootstrap-reboot.css">
+    <link rel="stylesheet" href="libraries/bootstrap-reboot.min.css">
+    <link rel="stylesheet" href="format.css">
+
+
+        <style>
+
+            </style>
+    </head>
+    <body onload="onInit()">
+      <div class="btn-group" role="group" aria-label="Basic example">
+      <button type="button" class="btn btn-primary" onclick="start1()">Start</button>
+      <button type="button" class="btn btn-secondary" onclick="reload()">Reload</button>
+     </div>
+     <div class="row">
+    <div class="col-sm-5">
+     <div id="sketch-holder" >
+      <!-- Our sketch will go here! -->
+    </div>
+  </div>
+    <div class="col-sm-5">
+      <br>
+      Percentage of block possibility:<br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
+       <span id="lbltipAddedComment"></span>
+    </div>
+    
+  </div>
+  
+
+
+    </body>
+</html>
