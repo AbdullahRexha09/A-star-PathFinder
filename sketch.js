@@ -48,6 +48,7 @@ function setup() {
 }
 
 function draw() {
+    frameRate(+localStorage.getItem("frmprsecond"));
     if (shouldDrawGrid) {
         background(0);
         for (var i = 0; i < cols; i++) {

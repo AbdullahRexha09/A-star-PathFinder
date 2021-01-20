@@ -48,9 +48,23 @@
   </div>
     <div class="col-sm-5">
       <br>
-      Percentage of block possibility:<br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
+      <span>Percentage of block possibility:</span><br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
        <span id="lbltipAddedComment"></span>
+       <br>
+       <br>
+       <br>
+       <br>
+       <span>Frame Rate per second:</span><br><input type="range" name="fpsrange" id="fpsrange" min="0" max="30" step="1"   onchange="framepSecond(value)"/>
+       <span id="lblFrameSecond"></span>
+       <br>
+       <br>
+       <br>
+       <br>
+       <span>Diagonal allowed:</span><br><input type="checkbox" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
+
     </div>
+    
+    
     
   </div>
   
