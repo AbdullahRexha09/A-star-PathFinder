@@ -4,8 +4,8 @@ function drag(value){
     let pct = +document.getElementById("range").value;
     percentage = pct / 100;
     localStorage.setItem("perctenge",percentage)
-    // location.reload();
-    window.top.location = (window.top.location.hostname + window.top.location.pathname);
+    location.reload();
+    // window.top.location = (window.top.location.hostname + window.top.location.pathname);
 }
 function framepSecond(value){
     document.getElementById("lblFrameSecond").innerText = value + "fps";
@@ -15,7 +15,7 @@ function framepSecond(value){
 function diagonalAllowed(value)
 {
     localStorage.setItem("diagonal",value);
-    window.top.location = (window.top.location.hostname + window.top.location.pathname);
+    location.reload();
 }
 function onInit(){
 
