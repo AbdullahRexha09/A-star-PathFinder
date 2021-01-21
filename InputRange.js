@@ -18,6 +18,7 @@ function diagonalAllowed(value)
     window.top.location = (window.top.location.hostname + window.top.location.pathname);
 }
 function onInit(){
+
     document.getElementById("lbltipAddedComment").innerText = (localStorage.getItem("perctenge")* 100).toString().split('.')[0] + "%";
     document.getElementById("range").value = +localStorage.getItem("perctenge") * 100;
     document.getElementById("lblFrameSecond").innerText = localStorage.getItem("frmprsecond") + "fps";
