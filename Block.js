@@ -81,6 +81,7 @@ function Block(i, j) {
         if (j > 0) {
             this.neighbors.push(grid[i][j - 1]);
         }
+
         if(localStorage.getItem("diagonal") == "true"){
         if (i > 0 && j > 0) {
             this.neighbors.push(grid[i - 1][j - 1]);

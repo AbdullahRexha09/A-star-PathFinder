@@ -116,7 +116,10 @@ function draw() {
                 }
             }
         } else {
-            console.log("No Solution");
+            bootbox.alert({
+                message:"No solution",
+                backdrop: true
+            });
             noLoop();
             return;
         }
@@ -166,7 +169,6 @@ function mousePressed() {
 
 function start1() {
     startPathFinder = true;
-    bootbox.alert("Your message here");
 }
 function reload(){
     location.reload();
