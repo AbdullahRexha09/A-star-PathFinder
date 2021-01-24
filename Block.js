@@ -82,7 +82,6 @@ function Block(i, j) {
             this.neighbors.push(grid[i][j - 1]);
         }
 
-        if(localStorage.getItem("diagonal") == "true"){
         if (i > 0 && j > 0) {
             this.neighbors.push(grid[i - 1][j - 1]);
         }
@@ -95,7 +94,7 @@ function Block(i, j) {
         if (i < cols - 1 && j < rows - 1) {
             this.neighbors.push(grid[i + 1][j + 1]);
         }
-    }
+    
 
     }
     if (random(1) < localStorage.getItem("perctenge")) {

@@ -12,6 +12,8 @@ var noSolution = false;
 var startPathFinder = false;
 var shouldDrawGrid = true;
 
+
+
 var grid = new Array(cols);
 
 //
@@ -49,6 +51,7 @@ function setup() {
 
 function draw() {
     frameRate(+localStorage.getItem("frmprsecond"));
+    var isDiagonalAllowed = localStorage.getItem("diagonal") == "true"
     if (shouldDrawGrid) {
         background(0);
         for (var i = 0; i < cols; i++) {
@@ -78,20 +81,20 @@ function draw() {
 
             if (current === end) {
                 var temp = current;
-                // path.push(temp);
-                // while(temp.previous){
-                //     path.push(temp.previous);
-                //     temp = temp.previous;
-                // }
                 noLoop();
                 console.log("DOne");
 
             }
             removeFromArray(openSet, current);
             closedSet.push(current);
-
             var neighbors = current.neighbors;
             for (var i = 0; i < neighbors.length; i++) {
+                if(!isDiagonalAllowed)
+                {
+                    if(neighbors[i].i != current.i && neighbors[i].j != current.j){
+                        break;
+                    }
+                }
                 var neighbor = neighbors[i];
                 if (!closedSet.includes(neighbor) && !neighbor.wall) {
                     // var tempG = current.g + 1;
