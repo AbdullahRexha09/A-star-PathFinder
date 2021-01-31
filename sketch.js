@@ -40,8 +40,12 @@ function setup() {
             grid[i][j].addNeighbors(grid);
         }
     }
+
+    drawMaze(grid);   
+    
     start = grid[0][0];
     end = grid[cols - 1][rows - 1];
+
 
     start.wall = false;
     end.wall = false;
@@ -82,7 +86,7 @@ function draw() {
             if (current === end) {
                 var temp = current;
                 noLoop();
-                console.log("DOne");
+                console.log("DOne");               
 
             }
             removeFromArray(openSet, current);
@@ -143,8 +147,16 @@ function draw() {
         }
 
         for (var i = 0; i < path.length; i++) {
-            path[i].show(color(0, 0, 255)); //blue
+            path[i].show(color(0, 0, 255)); //yellow
         }
+        noFill(255,255,0);
+        stroke(255);
+        beginShape();
+        for(var i = 0;i < path.length;i++){
+            vertex(path[i].i * w + w / 2,path[i].j * h + h /2)
+        }
+        endShape();
+
     }
 }
 
@@ -176,3 +188,6 @@ function start1() {
 function reload(){
     location.reload();
 }
+
+
+
