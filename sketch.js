@@ -19,7 +19,7 @@ var grid = new Array(cols);
 //
 
 function setup() {
-    let cnv = createCanvas(500, 500);
+    let cnv = createCanvas(600, 600);
     cnv.parent('sketch-holder')
     console.log('A*');
 
@@ -40,9 +40,10 @@ function setup() {
             grid[i][j].addNeighbors(grid);
         }
     }
-
+    if(localStorage.getItem("generateMaze") == "true")
+    {
     drawMaze(grid);   
-    
+    }
     start = grid[0][0];
     end = grid[cols - 1][rows - 1];
 

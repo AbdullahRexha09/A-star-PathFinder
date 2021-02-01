@@ -43,28 +43,38 @@
       <button type="button" class="btn btn-secondary" onclick="reload()">Reload</button>
      </div>
      <div class="row">
-    <div class="col-sm-5">
+    <div class="col-5">
      <div id="sketch-holder" >
       <!-- Our sketch will go here! -->
     </div>
-  </div>
-    <div class="col-sm-5">
+    </div>
+    <div class="col-5">
       <br>
+      <div class="row h-25">
+      <div class="h-25 col-6">
       <span>Percentage of block possibility:</span><br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
        <span id="lbltipAddedComment"></span>
-       <br>
-       <br>
-       <br>
-       <br>
+      </div>
+      <div class="h-25 col-6">
        <span>Frame rate per second:</span><br><input type="range" name="fpsrange" id="fpsrange" min="1" max="30" step="1"   onchange="framepSecond(value)"/>
        <span id="lblFrameSecond"></span>
-       <br>
-       <br>
-       <br>
-       <br>
-       <span>Diagonal allowed:</span><br><input type="checkbox" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
+       </div>
+       </div>
+       <div class="row h-25">
+       <div class="h-25 col-6">
+        <button type="button" class="btn btn-dark btn-lg" onclick="generateMaze()">Generate Maze</button>  
+      </div>
+      <div class="h-25 col-6">
+        <button type="button" class="btn btn-dark btn-lg" onclick="clearMaze()">Clear Maze</button>
+      </div>
+    </div>
+    <div class="row">
+      <div class="h-25 col-6">
+        <span>Diagonal allowed:</span><br><input type="checkbox" class="form-check-input" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
+      </div>
 
     </div>
+    
     
     
     

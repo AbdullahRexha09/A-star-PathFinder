@@ -15,6 +15,21 @@ function diagonalAllowed(value)
 {
     localStorage.setItem("diagonal",value);
 }
+function generateMaze()
+{
+    document.getElementById("diagonal").checked = false;
+    document.getElementById("lbltipAddedComment").innerText = (localStorage.getItem("perctenge")* 100).toString().split('.')[0] + "%";
+    localStorage.setItem("generateMaze",true);
+    localStorage.setItem("perctenge",0);
+    localStorage.setItem("diagonal",false);
+    location.reload();
+}
+function clearMaze()
+{
+    localStorage.setItem("generateMaze",false);
+    location.reload();
+
+}
 function onInit(){
 
     document.getElementById("lbltipAddedComment").innerText = (localStorage.getItem("perctenge")* 100).toString().split('.')[0] + "%";
