@@ -182,7 +182,14 @@ function heuristic(a, b) {
     return d;
 }
 
-function mousePressed() {
+function mouseDragged() {
+    for (var i = 0; i < cols; i++) {
+        for (var j = 0; j < rows; j++) {
+            grid[i][j].clicked();
+        }
+    }
+}
+function mouseClicked() {
     for (var i = 0; i < cols; i++) {
         for (var j = 0; j < rows; j++) {
             grid[i][j].clicked();
