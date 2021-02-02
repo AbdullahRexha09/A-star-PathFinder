@@ -170,8 +170,15 @@ function removeFromArray(arr, elt) {
 }
 
 function heuristic(a, b) {
+    var value = localStorage.getItem("heuristic");
+    if(value === "euclidean")
+    {
     var d = dist(a.i, a.j, b.i, b.j);
-    // var d = abs(a.i - b.i) + abs(a.j - b.j);
+    }
+    else if(value === "manhattan")
+    {
+        var d = abs(a.i - b.i) + abs(a.j - b.j);
+    }
     return d;
 }
 

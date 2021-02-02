@@ -1,5 +1,6 @@
 #sketch-holder{
  margin-top: 10px;
+ float: right;
  
 }
 body {
@@ -21,5 +22,29 @@ background: -ms-linear-gradient(top,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* I
 background: linear-gradient(to bottom,  #d5d5d5 0%,#f3f3f3 80%,#feffff 100%); /* W3C */
 filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#d5d5d5', endColorstr='#feffff',GradientType=0 ); /* IE6-9 */
 
+}
+.box {
+  float: left;
+  height: 20px;
+  width: 20px;
+  margin-bottom: 15px;
+  border: 1px solid black;
+  clear: both;
+  margin-left: 10px;
+}
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: rgb(0, 247, 0);
+}
+
+.black {
+  background-color: black;
+}
+.blue {
+  background-color: blue;
 }
 

@@ -30,6 +30,10 @@ function clearMaze()
     location.reload();
 
 }
+function heuristicSelected(value)
+{
+    localStorage.setItem("heuristic",value);
+}
 function onInit(){
 
     document.getElementById("lbltipAddedComment").innerText = (localStorage.getItem("perctenge")* 100).toString().split('.')[0] + "%";
@@ -39,3 +43,4 @@ function onInit(){
     document.getElementById("diagonal").checked = localStorage.getItem("diagonal") == "true" ? true : false;
     
 }
+

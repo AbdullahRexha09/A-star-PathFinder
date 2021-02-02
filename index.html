@@ -60,6 +60,19 @@
        </div>
        </div>
        <div class="row h-25">
+        <div class="h-25 col-6">
+          <span>Diagonal allowed:</span><br><input type="checkbox" class="form-check-input" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
+        </div>
+        <div class="h-25 col-6">
+          <span>Heuristic:</span><br>
+          <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="heuristicSelected(value)">
+            <option value="euclidean">Euclidean </option>
+            <option value="manhattan">Manhattan </option>
+          </select>
+        </div>
+  
+      </div>
+       <div class="row h-25">
        <div class="h-25 col-6">
         <button type="button" class="btn btn-dark btn-lg" onclick="generateMaze()">Generate Maze</button>  
       </div>
@@ -68,11 +81,35 @@
       </div>
     </div>
     <div class="row">
-      <div class="h-25 col-6">
-        <span>Diagonal allowed:</span><br><input type="checkbox" class="form-check-input" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
-      </div>
+    <div class="col-11" style="  width: 800px;
+    border: 3px solid green;
+    padding:35px;
+    margin: 20px;">
+    <div>
+      <div class="row">
+        <div>
+      <div class='box red'></div>
+      <span><strong>->Visited</strong></span>
+    </div>
+    <div>
+      <div class='box black'></div>
+      <span><strong>->Barrier</strong></span>
+    </div>
+    <div>
+      <div class='box green'></div>
+      <span><strong>->Neigbour  & Start</strong></span>
+    </div>
+    <div>
+      <div class='box blue'></div>
+      <span><strong>->Path & End</strong></span>
+    </div>
+    </div>
+    
+    </div>
 
     </div>
+  </div>
+
     
     
     
