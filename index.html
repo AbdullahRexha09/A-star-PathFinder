@@ -42,28 +42,28 @@
       <button type="button" class="btn btn-secondary" onclick="reload()">Reload</button>
      </div>
      <div class="row">
-    <div class="col-5">
+    <div class="col-sm-5 col-lg-5">
      <div id="sketch-holder" >
       <!-- Our sketch will go here! -->
     </div>
     </div>
-    <div class="col-5">
+    <div class="col-sm-5 col-lg-5">
       <br>
       <div class="row h-25">
-      <div class="h-25 col-6">
+      <div class="h-25 col-sm-6 col-lg-6">
       <span>Percentage of block possibility:</span><br><input type="range" name="range" id="range" min="0" max="100" step="1"   onchange="drag(value)"/>
        <span id="lbltipAddedComment"></span>
       </div>
-      <div class="h-25 col-6">
+      <div class="h-25 col-sm-6 col-lg-6">
        <span>Frame rate per second:</span><br><input type="range" name="fpsrange" id="fpsrange" min="1" max="30" step="1"   onchange="framepSecond(value)"/>
        <span id="lblFrameSecond"></span>
        </div>
        </div>
        <div class="row h-25">
-        <div class="h-25 col-6">
+        <div class="h-25 col-sm-6 col-lg-6">
           <span>Diagonal allowed:</span><br><input type="checkbox" class="form-check-input" name="diagonal" id="diagonal" checked="true" onclick="diagonalAllowed(checked)"/>
         </div>
-        <div class="h-25 col-6">
+        <div class="h-25 col-sm-6 col-lg-6">
           <span>Heuristic:</span><br>
           <select class="form-select form-select-lg mb-3" aria-label=".form-select-lg example" onchange="heuristicSelected(value)">
             <option value="euclidean">Euclidean </option>
@@ -73,15 +73,15 @@
   
       </div>
        <div class="row h-25">
-       <div class="h-25 col-6">
+       <div class="h-25 col-sm-6 col-lg-6">
         <button type="button" style="width: 200px;" class="btn btn-dark btn-lg" onclick="generateMaze()">Generate Maze</button>  
       </div>
-      <div class="h-25 col-6">
+      <div class="h-25 col-sm-6 col-lg-6">
         <button type="button" style="width: 200px;" class="btn btn-dark btn-lg" onclick="clearMaze()">Clear Maze</button>
       </div>
     </div>
     <div class="row">
-    <div class="col-11" style="  width: 800px;
+    <div class="col-sm-11" style="  width: 800px;
     border: 3px solid green;
     padding:35px;
     margin: 20px;">

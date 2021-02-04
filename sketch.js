@@ -19,7 +19,8 @@ var grid = new Array(cols);
 //
 
 function setup() {
-    let cnv = createCanvas(600, 600);
+    var height = $(window).height() - 100;
+    let cnv = createCanvas(height, height);
     cnv.parent('sketch-holder')
     console.log('A*');
 
@@ -53,6 +54,10 @@ function setup() {
 
     openSet.push(start);
 }
+// function windowResized() {
+//     var height = $(window).height() - 100;
+//     resizeCanvas(height, height);
+//   }
 
 function draw() {
     frameRate(+localStorage.getItem("frmprsecond"));
