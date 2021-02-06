@@ -20,7 +20,7 @@ var grid = new Array(cols);
 
 function setup() {
     
-    var height = $(window).height() - 100;
+    var height = $(window).height() - $(window).height() / 6;
     let cnv = createCanvas(height, height);
     cnv.parent('sketch-holder')
     console.log('A*');
