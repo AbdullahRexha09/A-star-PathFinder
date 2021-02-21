@@ -64,7 +64,7 @@ function Block(i, j) {
         if (this.wall) {
             fill(0);
         }
-        noStroke();
+        strokeWeight(0.5);
         rect(this.i * w, this.j * h, w - 1, h - 1);
     }
     this.addNeighbors = function(grid) {

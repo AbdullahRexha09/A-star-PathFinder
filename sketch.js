@@ -11,6 +11,8 @@ var path = [];
 var noSolution = false;
 var startPathFinder = false;
 var shouldDrawGrid = true;
+var t1;
+
 
 
 
@@ -93,7 +95,8 @@ function draw() {
             if (current === end) {
                 var temp = current;
                 noLoop();
-                console.log("DOne");               
+                var t0 = performance.now();
+                console.log("DOne" + (t0 - t1));               
 
             }
             removeFromArray(openSet, current);
@@ -154,7 +157,7 @@ function draw() {
         }
 
         for (var i = 0; i < path.length; i++) {
-            path[i].show(color(0, 0, 255)); //yellow
+            path[i].show(color(0, 0, 255)); //blue
         }
         noFill(255,255,0);
         stroke(255);
@@ -205,6 +208,7 @@ function mouseClicked() {
 
 function start1() {
     startPathFinder = true;
+    t1 = performance.now();
 }
 function reload(){
     location.reload();

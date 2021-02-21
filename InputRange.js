@@ -41,6 +41,7 @@ function onInit(){
     document.getElementById("lblFrameSecond").innerText = localStorage.getItem("frmprsecond") + "fps";
     document.getElementById("fpsrange").value = +localStorage.getItem("frmprsecond");
     document.getElementById("diagonal").checked = localStorage.getItem("diagonal") == "true" ? true : false;
+    document.getElementById("heuristic").value = localStorage.getItem("heuristic");
     
 }
 
